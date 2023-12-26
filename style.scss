@@ -1,0 +1,219 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+    margin-block-end: 0;
+    margin-block-start: 0;
+}
+
+ul[role='list'],
+ol[role='list'] {
+    list-style: none;
+    padding-inline-start: 0;
+}
+
+body {
+    min-height: 100vh;
+    line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+    line-height: 1.1;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    text-wrap: balance;
+}
+
+a:not([class]) {
+    text-decoration-skip-ink: auto;
+    color: currentColor;
+}
+
+img,
+picture {
+    max-width: 100%;
+    display: block;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+textarea:not([rows]) {
+    min-height: 10em;
+}
+
+:target {
+    scroll-margin-block: 5ex;
+}
+
+// MEDIA QUERIES
+// MIXINS
+
+@mixin tablet() {
+    @media screen and (width >= 48em) {
+        @content;
+    }
+}
+
+@mixin desktop() {
+    @media screen and (width >= 70em) {
+        @content;
+    }
+}
+
+// COLORS
+// PRIMARY COLORS
+$red: hsl(0, 78%, 62%);
+$cyan: hsl(180, 62%, 55%);
+$orange: hsl(34, 97%, 64%);
+$blue: hsl(212, 86%, 64%);
+// NEUTRAL COLORS
+$very-dark-blue: hsl(234, 12%, 34%);
+$grayish-blue: hsl(229, 6%, 66%);
+$very-light-gray: hsl(0, 0%, 98%);
+
+:root {
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: $very-light-gray;
+}
+
+main {
+    display: flex;
+    min-height: 100dvh;
+    flex-direction: column;
+    align-items: center;
+    margin: 3rem 1rem;
+    @include desktop() {
+        margin: 6rem 0;
+    }
+}
+
+article {
+    color: $very-dark-blue;
+    text-align: center;
+    max-width: 45rem;
+    h1 {
+        font-weight: 200;
+        @include tablet() {
+            font-size: 2.25rem;
+        }
+    }
+    h2 {
+        margin-top: 0.75rem;
+        font-weight: 600;
+        @include tablet() {
+            font-size: 2.25rem;
+        }
+    }
+    p {
+        color: $grayish-blue;
+        margin-top: 1rem;
+        @include tablet() {
+            font-size: 1.25rem;
+        }
+    }
+}
+
+.card-container {
+    margin-top: 5rem;
+    display: grid;
+    gap: 1.5rem;
+    justify-items: center;
+    max-width: 72rem;
+    @include tablet() {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @include desktop() {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-template-areas:
+            'start mid1 end'
+            'start mid2 end';
+    }
+}
+
+.card {
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.15) 0 25px 50px -12px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-width: 24rem;
+    &__title {
+        color: $very-dark-blue;
+    }
+    &__text {
+        color: $grayish-blue;
+    }
+    &__icon {
+        margin-top: 3rem;
+        place-self: end;
+    }
+}
+
+.supervisor {
+    border-top: $cyan 0.3rem solid;
+    @include desktop() {
+        grid-area: start;
+        align-self: center;
+    }
+}
+
+.team-builder {
+    border-top: $red 0.3rem solid;
+    @include desktop() {
+        grid-area: mid1;
+    }
+}
+
+.karma {
+    border-top: $orange 0.3rem solid;
+    @include desktop() {
+        grid-area: mid2;
+    }
+}
+
+.calculator {
+    border-top: $blue 0.3rem solid;
+    @include desktop() {
+        grid-area: end;
+        align-self: center;
+    }
+}
